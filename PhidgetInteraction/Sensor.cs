@@ -43,5 +43,10 @@ namespace PhidgetInteraction
             get { return id; }
             set { id = value; }
         }
+
+        public int RawValue
+        {
+            get; set;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using PhidgetInteraction;
+using System;
 
 namespace Test
 {
@@ -11,8 +12,9 @@ namespace Test
             phi.AddSensor(new Sensor("1", "D", 850));
             phi.AddSensor(new Sensor("2", "SPACE", 500));
             phi.StartPhidget();
-               
-            System.Console.ReadLine();
+            Console.ReadKey();
+            Console.WriteLine(phi.GetState());
+            Console.ReadKey();
         }
     }
 }

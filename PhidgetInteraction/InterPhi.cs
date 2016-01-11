@@ -7,7 +7,7 @@ namespace PhidgetInteraction
     public class InterPhi
     {        
         private InterfaceKit ikit;        
-        private List<Sensor> sensors;
+        public List<Sensor> sensors;
         
         public InterPhi()
         {
@@ -43,8 +43,12 @@ namespace PhidgetInteraction
                         return;
                     foreach(Sensor s in sensors)
                     {
-                        if (s.ID == e.Index.ToString() && e.Value < s.Minim)
+                        if (s.ID == e.Index.ToString())
                         {
+                            s.RawValue = e.Value;
+                        }
+                        if (s.ID == e.Index.ToString() && e.Value < s.Minim)
+                        {                    
                             s.Activated = true;
                         }
                         else
@@ -87,6 +91,23 @@ namespace PhidgetInteraction
                 }
             }
             return false;
+        }
+
+        public bool GetState()
+        {
+            return (ikit.sensors.Count) > 0;
+        }
+
+        public int GetRawValue(string key)
+        {
+            foreach(Sensor s in sensors)
+            {
+                if (s.Value == key)
+                {
+                    return s.RawValue;
+                }
+            }
+            return -1;
         }
     }
 }
